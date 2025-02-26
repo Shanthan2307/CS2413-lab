@@ -1,27 +1,21 @@
 struct ListNode* removeElements(struct ListNode* head, int val) {
-    struct ListNode*temp,*prev;
-    if(head!=NULL){
-       
-       if(head->val==val){
-        head=head->next;
-       }
-    if(head!=NULL){
-temp=head;
-    while(temp->next!=NULL){
-            if(temp->next->val==val){
-            temp->next=temp->next->next;
+    // Handle cases where head itself needs to be removed
+    while (head && head->val == val) {
+        head = head->next;
+    }
+
+    // Initialize pointers
+    struct ListNode* temp = head;
+    struct ListNode* prev = NULL;
+
+    while (temp) {
+        if (temp->val == val) {
+            prev->next = temp->next; // Skip the node with val
+        } else {
+            prev = temp; // Move prev only when we don’t delete
         }
-        else
-        temp=temp->next;
-        
+        temp = temp->next;
     }
-    if(temp->val==val)
-        head->next=NULL;
-    
-    if(head->val==val){
-         head=head->next;
-    }
-    }
-    }
+
     return head;
 }
